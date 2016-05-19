@@ -6,8 +6,6 @@ gem 'spring', :group => :development
 gem 'pg'
 
 gem 'active_model_serializers'
-gem 'paperclip', github: 'thoughtbot/paperclip'
-
 gem 'hirb'
 
 # To use ActiveModel has_secure_password

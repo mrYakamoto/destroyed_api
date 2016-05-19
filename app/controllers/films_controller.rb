@@ -7,7 +7,8 @@ class FilmsController < ApplicationController
     puts "="*20
     puts "INDEX"
     puts "="*20
-    @films = Film.all
+
+    @films = Film.all.as_json
 
     render json: @films
   end
@@ -19,7 +20,7 @@ class FilmsController < ApplicationController
     puts "SHOW"
     puts "="*20
 
-    render json: @film
+    render json: @film.as_json
   end
 
   # POST /films
@@ -28,10 +29,11 @@ class FilmsController < ApplicationController
     puts "="*20
     puts "CREATE"
     puts "="*20
+    p film_params
     @film = Film.new(film_params)
 
     if @film.save
-      render json: @film, status: :created, location: @film
+      render json: @film.as_json, status: :created, location: @film
     else
       render json: @film.errors, status: :unprocessable_entity
     end
@@ -70,6 +72,6 @@ class FilmsController < ApplicationController
     end
 
     def film_params
-      params[:film]
+      params.require(:film).permit(:title)
     end
 end

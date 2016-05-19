@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Destroyed</title>
+
+</head>
+
+<body id="page-top">
+
+    <h1>Destroyed</h1>
+    <h2>Films of crushing emotional weight</h2>
+    <div>
+        <form id ="new_film">
+            <label>title: </label>
+            <input type="text" id="film-title" name="film[title]" ></br>
+            <input type="submit" value="Add">
+        </form>
+        <ul id="films"></ul>
+    </div>
+
+    <!-- jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+
+    <script type="text/javascript" charse="utf-8">
+    $(document).ready(function(){
+      getFilmsJSON();
+      newTaskListener();
+  })
+    function addFilm(film){
+      $('#films').append('<li>' + film.title + '</ul>');
+  }
+
+  function newTaskListener(){
+      $('#new_film').submit(function(e){
+        e.preventDefault();
+
+        $.post('/films', $(this).serialize(), addFilm);
+        this.reset();
+    })
+  }
+
+  function getFilmsJSON(){
+    $.ajax({
+        method: 'GET',
+        url: '/films'
+    })
+    .done(function(response){
+        $.each(response.films, function(){ addFilm(this); });
+    })
+    .error(function(xhr, unknown, error){
+        alert(error);
+    })
+}
+</script>
+
+</body>
+
+</html>

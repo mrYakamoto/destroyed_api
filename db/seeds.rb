@@ -3,8 +3,11 @@ film_titles_array = [
   "Magnolia",
   "Tree of Life",
   "The Light Between the Oceans",
-  "Anomalisa",
-  "Syndecdoche, New York"
+  "Syndecdoche, New York",
+  "Revolutionary Road",
+  "The Elephant Man"
 ]
 
-film_titles_array.each { |title| Film.create!(title:title) }
+film_titles_array.each { |title|
+  puts "created #{title}" if Film.create!(title:title)
+}
