@@ -47,15 +47,8 @@
   }
 
   function getFilmsJSON(){
-    $.ajax({
-        method: 'GET',
-        url: '/films'
-    })
-    .done(function(response){
+    $.getJSON('/films', function(response){
         $.each(response.films, function(){ addFilm(this); });
-    })
-    .error(function(xhr, unknown, error){
-        alert(error);
     })
 }
 </script>
