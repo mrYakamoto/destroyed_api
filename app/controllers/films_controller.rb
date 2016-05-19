@@ -1,5 +1,4 @@
 class FilmsController < ApplicationController
-  skip_before_filter :verify_authenticity_token
   before_action :set_film, only: [:show, :update, :destroy]
 
   # GET /films
